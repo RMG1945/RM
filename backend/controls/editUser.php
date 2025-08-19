@@ -17,7 +17,7 @@
             $target_file = $target_dir . $image_name;
 
             $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            if(in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif', 'webp'])) {
+            if(in_array($imageFileType, ['jpg', 'jpeg', 'png', 'gif'])){
                 if (move_uploaded_file($_FILES["profile_image"]["tmp_name"], $target_file)) {
                     $profile_image = $image_name;
                 } else {
@@ -31,7 +31,6 @@
                 exit;
             }
         }
-
 
         $stmt = $pdo->prepare("UPDATE users SET first_name = ?, last_name = ?, address = ?, phone = ?, email = ?".($profile_image ? ", profile_image = ?" : "")." WHERE id = ?");
         $params = [$first_name, $last_name, $address, $phone, $email];

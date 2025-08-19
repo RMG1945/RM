@@ -11,27 +11,11 @@
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
-    <style>
-    #bg-video {
-        position: fixed;
-        top: 0;
-        left: 0;
-        min-width: 100vw;
-        min-height: 100vh;
-        object-fit: cover;
-        z-index: -1;
-    }
-</style>
-
 </head>
 
 <body style="background: linear-gradient(to right, #290054, #00b2ff);">
-    <video autoplay muted loop playsinline id="bg-video">
-    <source src="https://motionbgs.com/media/660/bmw-carros-driving.960x540.mp4" type="video/mp4">
-    Your browser does not support the video tag.
-    </video>
     <div class="container d-flex justify-content-center align-items-center" style="height: 100vh; max-width: 900px;">
-        <div class="card" style="background-color: rgba(255, 255, 255, 0.16); backdrop-filter: blur(1px); border-radius: 15px;">
+        <div class="card">
             <div class="row g-0 shadow">
                 <!-- ฟอร์มด้านซ้าย -->
                 <div class="col-md-6 py-5 px-3">

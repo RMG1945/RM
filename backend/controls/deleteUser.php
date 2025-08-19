@@ -1,19 +1,22 @@
 <?php
     session_start();
-    include '../controls/db.php';
+    include 'db.php';
 
     if (isset($_GET['id'])) {
         $id = $_GET['id'];
+
+        // Prepare and execute the delete statement
         $stmt = $pdo->prepare("DELETE FROM users WHERE id = ?");
         $result = $stmt->execute([$id]);
 
         if ($result) {
-            $_SESSION['success'] = "ลบผู้ใช้งานเรียบร้อยแล้ว";
+            $_SESSION['success'] = "User deleted successfully!";
             header("Location: ../user.php");
         } else {
-            $_SESSION['error'] = "เกิดข้อผิดพลาดในการลบผู้ใช้งาน";
+            $_SESSION['error'] = "Failed to delete user.";
             header("Location: ../user.php");
         }
-    exit;
+
+        exit;
     }
 ?>

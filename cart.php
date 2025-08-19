@@ -1,6 +1,37 @@
 <?php
 session_start();
+//เพิ่มจำนวนสินค้าในตะกร้า
+if (isset($_POST['action']) && $_POST['action'] == 'increase' && isset($_POST['productId'])) {
+    $productId = $_POST['productId'];
+    foreach ($_SESSION['cart'] as $key => $item) {  // ใช้ $key เพื่อไม่ให้มีการอ้างอิงโดยตรง
+        if ($item['productId'] == $productId) {
+            $_SESSION['cart'][$key]['quantity'] += 1;
+            break;
+        }
+    }
+}
+//ลดจำนวนสินค้าในตะกร้า
+if (isset($_POST['action']) && $_POST['action'] == 'decrease' && isset($_POST['productId'])) {
+    $productId = $_POST['productId'];
+    foreach ($_SESSION['cart'] as $key => $item) {
+        if ($item['productId'] == $productId && $item['quantity'] > 1) {
+            $_SESSION['cart'][$key]['quantity'] -= 1;
+            break;
+        }
+    }
+}
+//ลบสินค้าออกจากตะกร้า
+if (isset($_POST['action']) && $_POST['action'] == 'remove' && isset($_POST['productId'])) {
+    $productId = $_POST['productId'];
+    foreach ($_SESSION['cart'] as $key => $item) {
+        if ($item['productId'] == $productId) {
+            unset($_SESSION['cart'][$key]);
+            break;
+        }
+    }
+}
 ?>
+<?php include './controls/fetchDelivery.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -15,10 +46,10 @@ session_start();
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 
-<body>
+<body class="d-flex flex-column min-vh-100">
     <?php include './components/header.php'; ?>
 
-    <section id="cart_product" class="py-5">
+    <section id="cart_product" class="flex-grow-1 py-5">
         <div class="container">
             <h2 class="mb-4">แสดงข้อมูลตะกร้าสินค้า</h2>
             <div class="container mt-5">
@@ -36,15 +67,27 @@ session_start();
                                         </div>
                                     </div>
                                     <div class="btn-group" role="group" aria-label="Basic example">
-                                        <button class="btn btn-success btn-sm">
-                                            <i class="bi bi-plus-circle-fill"></i> เพิ่ม
-                                        </button>
-                                        <button class="btn btn-warning btn-sm">
-                                            <i class="bi bi-dash-circle-fill"></i> ลด
-                                        </button>
-                                        <button class="btn btn-danger btn-sm">
-                                            <i class="bi bi-trash-fill"></i> ลบ
-                                        </button>
+                                        <form method="post" class="d-inline">
+                                            <input type="hidden" name="productId" value="<?= htmlspecialchars($item['productId']); ?>">
+                                            <input type="hidden" name="action" value="increase">
+                                            <button type="submit" class="btn btn-danger btn-sm">
+                                                <i class="bi bi-plus-circle-fill"></i> เพิ่ม
+                                            </button>
+                                        </form>
+                                        <form method="post" class="d-inline">
+                                            <input type="hidden" name="productId" value="<?= htmlspecialchars($item['productId']); ?>">
+                                            <input type="hidden" name="action" value="decrease">
+                                            <button type="submit" class="btn btn-warning btn-sm">
+                                                <i class="bi bi-dash-circle-fill"></i> ลด
+                                            </button>
+                                        </form>
+                                        <form method="post" class="d-inline" onsubmit="return confirmDelete(event);">
+                                            <input type="hidden" name="productId" value="<?= htmlspecialchars($item['productId']); ?>">
+                                            <input type="hidden" name="action" value="remove">
+                                            <button type="submit" class="btn btn-secondary btn-sm">
+                                                <i class="bi bi-trash-fill"></i> ลบ
+                                            </button>   
+                                        </form>
                                     </div>
                                 </li>
                             <?php endforeach; ?>
@@ -52,12 +95,43 @@ session_start();
                     <?php else: ?>
                         <p class="text-center col-12">ไม่มีสินค้าในตระกล้า</p>
                     <?php endif; ?>
+                    <div class="mt-4 text-right">
+                        <h4><strong>Delivery Address:</strong></h4>
+                        <hr>
+                        <p><strong>Name: </strong><?= htmlspecialchars($row['first_name']) . " " . htmlspecialchars($row['last_name']); ?></p>
+                        <p><strong>Address: </strong> <?= 
+                        htmlspecialchars($row['address']); ?></p>
+                        <p><strong>Tel: </strong><?= htmlspecialchars   ($row['phone']); ?></p>
+                        <p><strong>Email: </strong><?= 
+                        htmlspecialchars($row['email']); ?></p>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <?php include './components/footer.php'; ?>
+
+    <script>
+        function confirmDelete(event) {
+            event.preventDefault();
+            const form = event.target;
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "Do you want to remove this item from the cart?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes, remove it!',
+                cancelButtonText: 'No, keep it'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        }
+    </script>
 </body>
 
 </html>

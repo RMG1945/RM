@@ -18,41 +18,16 @@ if (!isset($_SESSION['user_id'])) {
     <!-- SweetAlert2 CDN -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="./assets/css/style.css">
-
-    <style>
-        #bg-video {
-            position: fixed;
-            top: 0;
-            left: 0;
-            min-width: 100vw;
-            min-height: 100vh;
-            object-fit: cover;
-            z-index: -1;
-            filter: blur(8px) brightness(0.6);
-        }
-
-        main {
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 10px;
-            padding: 20px;
-        }
-    </style>
 </head>
 
-<body>
-    
-    <video autoplay muted loop id="bg-video">
-        <source src="https://motionbgs.com/media/340/speeding-black-mclaren-senna.960x540.mp4" type="video/mp4">
-
-    </video>
-
+<body class="d-flex flex-column min-vh-100">
     <?php include './components/header.php'; ?>
 
     <!-- Hero Section -->
-    <section class="hero text-white text-center py-5" style="background: linear-gradient(to right,rgb(0, 0, 0),rgb(53, 56, 52)); height: 100vh;">
+    <section class="hero text-white text-center py-5" style="background: linear-gradient(to right, #000000ff, #2e3538ff); height: 100vh;">
         <div class="container h-100 d-flex flex-column justify-content-center">
-            <h1 class="display-4">Welcome ยินดีต้อนรับสู่จุดสตาร์ทรถในฝันของคุณ</h1>
-            <p class="lead">สำรวจและเปรียบเทียบรถรุ่นล่าสุด พร้อมเทคโนโลยีที่เปลี่ยนอนาคตการขับขี่</p>
+            <h1 class="display-4">ยินดีต้อนรับสู่เว็บไซต์ของเรา</h1>
+            <p class="lead">ค้นพบโลกแห่งเทคโนโลยีสารสนเทศ และข่าวสารล่าสุดเกี่ยวกับการพัฒนาเทคโนโลยี</p>
             <a href="#content" class="btn btn-light btn-lg mx-auto">เริ่มต้นตอนนี้</a>
         </div>
     </section>
@@ -62,13 +37,12 @@ if (!isset($_SESSION['user_id'])) {
         <div class="container">
             <h2 class="text-center mb-4">เกี่ยวกับเทคโนโลยีสารสนเทศ</h2>
             <p>
-                เทคโนโลยีสารสนเทศ (Information Technology หรือ IT) คือการนำเทคโนโลยีมาใช้ในการจัดการข้อมูลและสารสนเทศ เพื่อเพิ่มประสิทธิภาพในการดำเนินงานของธุรกิจยานยนต์ 
-                ไม่ว่าจะเป็นการพัฒนาซอฟต์แวร์ในรถยนต์ การเชื่อมต่อข้อมูลผ่านเครือข่าย หรือการรักษาความปลอดภัยของระบบอัจฉริยะภายในรถ.
+                เทคโนโลยีสารสนเทศ (Information Technology หรือ IT) เป็นการใช้เทคโนโลยีในการจัดการกับข้อมูลและสารสนเทศเพื่อสนับสนุนการทำงานทางธุรกิจและองค์กรต่างๆ
+                ไม่ว่าจะเป็นการพัฒนาโปรแกรมคอมพิวเตอร์ การจัดการฐานข้อมูล การสื่อสารผ่านเครือข่าย หรือการป้องกันข้อมูลทางไซเบอร์ เทคโนโลยีสารสนเทศมีบทบาทสำคัญในการพัฒนาและขับเคลื่อนองค์กรสู่ความสำเร็จในยุคดิจิทัล.
             </p>
             <p>
-                ในอุตสาหกรรมยานยนต์ยุคใหม่ IT มีบทบาทสำคัญในการพัฒนาแอปพลิเคชันควบคุมรถ ระบบคลาวด์ที่ซิงค์ข้อมูลแบบเรียลไทม์ 
-                และการใช้ Big Data เพื่อวิเคราะห์พฤติกรรมการขับขี่ รวมถึงช่วยให้ผู้ผลิตสามารถปรับปรุงผลิตภัณฑ์และบริการได้อย่างแม่นยำ ตั้งแต่ระบบนำทางอัจฉริยะ ระบบช่วยขับขี่ ไปจนถึงรถยนต์ไฟฟ้าและไร้คนขับ 
-                เทคโนโลยีสารสนเทศคือรากฐานสำคัญที่ขับเคลื่อนนวัตกรรมและยกระดับประสบการณ์ของผู้ใช้ในโลกยานยนต์ดิจิทัล.
+                เทคโนโลยีสารสนเทศได้มีการพัฒนาอย่างรวดเร็วในช่วงไม่กี่ปีที่ผ่านมา และสามารถปรับตัวให้เข้ากับความต้องการของธุรกิจและผู้ใช้งานได้อย่างมีประสิทธิภาพ
+                เช่น การพัฒนาโปรแกรมหรือแอปพลิเคชันใหม่ๆ ที่ช่วยเพิ่มประสิทธิภาพในการทำงาน เช่น การใช้ระบบคลาวด์ (Cloud Computing) หรือการใช้ Big Data ในการวิเคราะห์ข้อมูลเพื่อสนับสนุนการตัดสินใจ.
             </p>
         </div>
     </section>
